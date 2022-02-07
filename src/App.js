@@ -15,11 +15,20 @@ const App = ()=>{
     const randomIndex = Math.floor(Math.random()* wordList.length);
     let selectedWord = wordList[randomIndex];
 
-    // states
-    // now we need to some
+    // states 
+    const [correctLetters, setCorrectLetters] = useState([]);
+    const [incorrectLetters, setIncorrectLetters] = useState([]);
 
     return (
         <div className="game-container">
+
+            <div className="word-container">
+                <Word
+                    correctLetters={correctLetters}
+                    selectedWord={selectedWord}
+                />
+            </div>
+
             <div className="keyboard-container">
                 <div className="keyboardA">
                 {keySeriesA.map((letter, index)=>{
@@ -40,7 +49,6 @@ const App = ()=>{
                     })}
                 </div>
             </div>
-            
 
         </div>
     )
