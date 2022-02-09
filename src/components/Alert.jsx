@@ -18,7 +18,8 @@ const Alert = (props)=>{
         return (()=>{
             clearTimeout(alertTimeout);
         })
-    },[])
+    },[]);
+    
     return (
         <div style={alertStyle}>
             <div>
