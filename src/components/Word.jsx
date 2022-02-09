@@ -9,7 +9,7 @@ const Word = (props) => {
           {selectedWord.split('').map((selectedLetter, index)=>{
               return (
                 <div key={index} style={{margin:10}}>
-                  {correctLetters.includes(selectedLetter) ? selectedLetter : '_'}
+                  {correctLetters.includes(selectedLetter.toLowerCase()) ? selectedLetter : '_'}
                 </div>
               )
             })}

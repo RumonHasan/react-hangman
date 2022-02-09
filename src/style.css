@@ -50,3 +50,28 @@ body {
   padding: 10px;
   cursor: pointer;
 }
+
+.alert-container {
+  width: 300px;
+  height: 40px;
+  border: 2px solid greenyellow;
+  position: absolute;
+  top: 0;
+  margin-top: 10px;
+  background: green;
+}
+
+.wrong-container {
+  position: absolute;
+  height: 60px;
+  right: 0;
+  width: 30vmin;
+  background: red;
+  top: 0;
+  margin: 10px;
+}
+
+.wrong-header {
+  position: absolute;
+  right: 0;
+}
