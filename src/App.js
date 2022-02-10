@@ -22,6 +22,8 @@ const App = ()=>{
     const [correctLetters, setCorrectLetters] = useState([]);
     const [incorrectLetters, setIncorrectLetters] = useState([]);
     const [gameOver, setGameOver] = useState(false); // state to check game status
+    const [gameStateMessages, setGameStateMessage] = useState('');
+    const [word, setWord] = useState('');
     // lets call a word state
     const [selectWord, setSelectWord] = useState(selectedWord);
     // notification
@@ -43,16 +45,40 @@ const App = ()=>{
         const handleGameWinner = ()=>{
             if(gameWinnerChecker(correctLetters, selectWord, incorrectLetters) === 'winner'){
                 setGameOver(true);
+                setGameStateMessage('Game Won')
             };
             if(gameWinnerChecker(correctLetters, selectWord, incorrectLetters) === 'loss'){
                 setGameOver(true);
+                setGameStateMessage('Game lost');
+                setWord(selectWord);
             }
         };
         handleGameWinner();
     });
 
-    if(gameOver) return <h1 style={{color: 'white'}}>You win!</h1>
+    const handleGameStart = ()=>{
+        // resetting random word
+        const randomIndex = Math.floor(Math.random()* wordList.length);
+        selectedWord = wordList[randomIndex];
+        setSelectWord(selectedWord);
+        setGameOver(false);
+        // resetting the incorrect and correct letters
+        setIncorrectLetters([]);
+        setCorrectLetters([]);
+    };
 
+    if(gameOver) return (
+            <div>
+                <h1 style={{color:'white'}}>{gameStateMessages}: {
+                    gameStateMessages === 'Game Won' ? 'Congratulations': `The Word was: ${word}`
+                }</h1>
+                <button onClick={handleGameStart}>Restart Game</button>
+            </div>
+        )
+    
+    // thats it for this video... the CSS is disastrous but the we still got a working ugly hang man game...
+    // hope yall enjoyed it!!!
+    
 
     // this function will contain the main game logic
     const handleKeyInputs = (key)=>{
