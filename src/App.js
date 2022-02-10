@@ -5,6 +5,7 @@ import Word from "./components/Word";
 import Alert from "./components/Alert";
 import './style.css';
 import WrongLetter from "./components/WrongLetter";
+import { gameWinnerChecker } from "./services/gameWinnerChecker";
 
 const App = ()=>{
     // custom keyboard
@@ -20,6 +21,7 @@ const App = ()=>{
     // states 
     const [correctLetters, setCorrectLetters] = useState([]);
     const [incorrectLetters, setIncorrectLetters] = useState([]);
+    const [gameOver, setGameOver] = useState(false); // state to check game status
     // lets call a word state
     const [selectWord, setSelectWord] = useState(selectedWord);
     // notification
@@ -35,6 +37,22 @@ const App = ()=>{
             message
         })
     };
+
+    // game handler
+    useEffect(()=>{
+        const handleGameWinner = ()=>{
+            if(gameWinnerChecker(correctLetters, selectWord, incorrectLetters) === 'winner'){
+                setGameOver(true);
+            };
+            if(gameWinnerChecker(correctLetters, selectWord, incorrectLetters) === 'loss'){
+                setGameOver(true);
+            }
+        };
+        handleGameWinner();
+    });
+
+    if(gameOver) return <h1 style={{color: 'white'}}>You win!</h1>
+
 
     // this function will contain the main game logic
     const handleKeyInputs = (key)=>{
@@ -56,7 +74,7 @@ const App = ()=>{
 
     return (
         <div className="game-container">
-            {alert.show &&
+        {alert.show &&
                 <div className="alert-container">
                     <Alert
                         removeAlert={displayAlert}
@@ -98,7 +116,6 @@ const App = ()=>{
                     })}
                 </div>
             </div>
-
         </div>
     )
 };
